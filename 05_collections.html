@@ -19,15 +19,32 @@
             })
 
             var persons1 = new Persons([
-                new Person({name:"Ola"}),
-                new Person({name:"uber"}),
-                new Person({name:"Che"})
+                new Person({name:"Ola", users:1000}),
+                new Person({name:"uber", users:1800}),
+                new Person({name:"Che", users:500})
             ])
 
-            persons1.add(new Person({name:"Ridz"}))
-            persons1.add(new Person({name:"Zoom"}), {at: 0})
+            persons1.add(new Person({name:"Ridz", users:200}))
+            persons1.add(new Person({name:"Zoom", users:800}), {at: 0})
+            persons1.add(new Person({name:"uber", users:900}), {at: 0})
 
-   
+            var search1 = persons1.where({name:"Ridz"})
+            var search2 = persons1.where({name:"uber"})
+            var search3 = persons1.findWhere({name:"uber"})
+
+            var search4 = persons1.filter(function(person){
+                return person.get("users") >800
+            })
+           
+            var search5 = persons1.filter(person=>person.get("users") >800)
+            var search6 = persons1.filter(person=>{
+                return person.get("users") >800
+            })
+
+            persons1.each(person =>{
+                console.log(person);
+            })
+            
 
         
 
