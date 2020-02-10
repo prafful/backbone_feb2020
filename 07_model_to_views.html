@@ -18,8 +18,14 @@
            var Person = Backbone.Model.extend() 
 
            var PersonView = Backbone.View.extend({
+
+                tagName:"span",
+                className: "person",
+                id:"personId",
+
                render: function(){
                    console.log("View is rendering!");
+                   console.log(this.$el);
                    this.$el.html(this.model.get("name"))
                    return this
                }

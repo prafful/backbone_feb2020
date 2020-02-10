@@ -11,9 +11,9 @@
     <body>
         <h3>Backbone</h3>
    
-        <div id="container">
+        <ol id="container">
 
-        </div>
+        </ol>
     
         <script>
 
@@ -24,6 +24,9 @@
            })
 
            var PersonView = Backbone.View.extend({
+                tagName:"li",
+                className: "person",
+               
                render: function(){
                    console.log("View is rendering!");
                    this.$el.html(this.model.get("name"))
