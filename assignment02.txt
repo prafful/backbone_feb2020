@@ -7,6 +7,6 @@
 4. When the delete button is clicked, remove the 
     corresponding <li> from the collection and DOM
     respectively.
-6. Add model to the given collection using .add() or .push() 
+5. Add model to the given collection using .add() or .push() 
     method, which in turn should update the view with 
     updated collection!
