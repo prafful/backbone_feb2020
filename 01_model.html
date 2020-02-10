@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <script>
+            var Person = Backbone.Model.extend({
+                initialize:function(){
+                    console.log("Person is initialized!");
+                },
+                constructor: function(){
+                    console.log("Person Constructor!");
+                    Backbone.Model.apply(this, arguments)
+                }
+            });
+
+            var person1 = new Person()
+        </script>
+    </body>
+</html>

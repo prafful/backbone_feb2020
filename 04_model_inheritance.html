@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <script>
+       var Vehicle = Backbone.Model.extend({
+           drive:function(){
+               console.log("Drive the vehicle - 4 wheels");
+           }
+       })
+
+       var Bike = Vehicle.extend({
+           drive: function(){
+            //Vehicle.prototype.drive.apply(this)   
+            console.log("Drive the vehicle - 2 wheels");
+           }
+       })
+
+       var bike1 = new Bike()
+       bike1.drive()
+
+
+        </script>
+    </body>
+</html>

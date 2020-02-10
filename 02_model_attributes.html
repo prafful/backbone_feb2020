@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <script>
+        var Person = Backbone.Model.extend({
+            defaults:{
+               name:"",
+               location:"",
+               score:0
+            }
+        })
+
+        var person1 = new Person({
+            name:"Prafful Daga",
+            location:"Chennai",
+            score:88
+        })
+
+        var person2 = new Person({
+            technology:"Backbone",
+            salary:8888
+        })
+
+        </script>
+    </body>
+</html>

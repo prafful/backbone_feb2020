@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <script>
+            
+            var Person = Backbone.Model.extend()
+
+            var Persons = Backbone.Collection.extend({
+                model: Person
+            })
+
+            var persons1 = new Persons([
+                new Person({name:"Ola"}),
+                new Person({name:"uber"}),
+                new Person({name:"Che"})
+            ])
+
+            persons1.add(new Person({name:"Ridz"}))
+            persons1.add(new Person({name:"Zoom"}), {at: 0})
+
+   
+
+        
+
+        </script>
+    </body>
+</html>
