@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <div id="container">
+
+        </div>
+        <script>
+          var person = {
+              name:"prafful daga",
+              walk: function(){
+                  console.log("Walking event will be fired!");
+                  this.trigger("walking", {
+                      speed: 2,
+                      startTime:"0800"
+                  })
+              }
+          }
+
+          _.extend(person, Backbone.Events)
+          
+          person.on("walking", function(eventObject){
+              console.log("Walking event is fired!");
+              console.log("Event Object: " )
+              console.log(eventObject);
+          })
+
+          person.walk()
+
+           
+        </script>
+    </body>
+</html>
