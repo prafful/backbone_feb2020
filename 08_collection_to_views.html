@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+   
+        <div id="container">
+
+        </div>
+    
+        <script>
+
+           var Person = Backbone.Model.extend() 
+
+           var Persons = Backbone.Collection.extend({
+               model:Person
+           })
+
+           var PersonView = Backbone.View.extend({
+               render: function(){
+                   console.log("View is rendering!");
+                   this.$el.html(this.model.get("name"))
+                   return this
+               }
+           })
+
+           var PersonsView = Backbone.View.extend({
+               render:function(){
+                   var self = this
+                   this.model.each(function(p){
+                        var pvv = new PersonView({model: p})
+                        console.log(pvv);
+                        self.$el.append(pvv.render().$el)
+                   })
+               }
+           })
+
+           var personsCollection = new Persons([
+                    new Person({name:"Yuko San"}),
+                    new Person({name:"Mita San"}),
+                    new Person({name:"Kita San"})
+           ])
+           var persons_v  = new PersonsView({el:"#container", model:personsCollection})
+           persons_v.render()
+
+           //var person = new Person({name:"Oka San"})
+           //var pv = new PersonView({el:"#container", model: person})
+           //pv.render()
+           //var pv = new PersonView()
+           //$("#container").html(pv.render().$el)
+
+           
+        </script>
+    </body>
+</html>

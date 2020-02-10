@@ -2,9 +2,10 @@ Create a model -> Vehicle (registrationNumber, color)
 Child model to Vehicle -> Car
 
 Have a method called ignite() in both models!
-Validate that model is having attribute -> registrationNumber
-Dump the log to console if registrationNumber is absent!
+Validate that model (Car, Vehicle) is 
+having attribute -> registrationNumber
 
+Dump the log to console if registrationNumber is absent!
 
  Create 6 car instances for collections of type Car!
 

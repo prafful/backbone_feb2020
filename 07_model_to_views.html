@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <div id="container">
+
+        </div>
+        <script>
+
+           var Person = Backbone.Model.extend() 
+
+           var PersonView = Backbone.View.extend({
+               render: function(){
+                   console.log("View is rendering!");
+                   this.$el.html(this.model.get("name"))
+                   return this
+               }
+           })
+
+           var person = new Person({name:"Oka San"})
+           var pv = new PersonView({el:"#container", model: person})
+           pv.render()
+           //var pv = new PersonView()
+           //$("#container").html(pv.render().$el)
+
+           
+        </script>
+    </body>
+</html>
