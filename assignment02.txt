@@ -1,0 +1,12 @@
+1. Create the required Backbone view to display a list of 
+    Vehicles/Cars. Add 6 models to collection!
+2. Each Vehicle/Car should be displayed as an <li> with the 
+    "class" vehicle. 
+3. Inside the <li>: Display the registration number, 
+    followed by a button called "Delete".
+4. When the delete button is clicked, remove the 
+    corresponding <li> from the collection and DOM
+    respectively.
+6. Add model to the given collection using .add() or .push() 
+    method, which in turn should update the view with 
+    updated collection!
