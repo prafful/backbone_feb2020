@@ -1,0 +1,56 @@
+{
+  "friends": [
+    {
+      "id": 1,
+      "name": "Ola"
+    },
+    {
+      "name": "Ride",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Uber"
+    },
+    {
+      "name": "Fly",
+      "id": 4
+    },
+    {
+      "name": "Hia",
+      "id": 5
+    },
+    {
+      "name": "Hia",
+      "id": 6
+    },
+    {
+      "name": "Chi",
+      "id": 7
+    },
+    {
+      "name": "Mie",
+      "id": 9
+    },
+    {
+      "name": "Mie",
+      "id": 10
+    },
+    {
+      "name": "Mie",
+      "id": 11
+    },
+    {
+      "name": "Mie",
+      "id": 12
+    },
+    {
+      "name": "Mie",
+      "id": 13
+    },
+    {
+      "name": "Mie",
+      "id": 14
+    }
+  ]
+}

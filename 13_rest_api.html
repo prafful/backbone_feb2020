@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <script>
+            
+            var Person = Backbone.Model.extend({
+                //url:"http://localhost:3000/friends"
+            })
+
+            var Persons = Backbone.Collection.extend({
+                model: Person,
+                url:"https://jsonplaceholder.typicode.com/users"
+            })
+
+            var allPersons = new Persons()
+            console.log("Fetch from rest endpoint");
+            allPersons.fetch({
+                success: function(response){
+                    console.log("In success call back!");
+                    console.log(response);
+                },
+                error: function(error){
+                       console.log("In error call back");
+                       console.log(error); 
+                }
+            })
+            //console.log("Print the fetched friends");
+            //console.log(allPersons);
+
+            //var person1 = new Person();
+            //person1.destroy({"id":1})
+
+
+
+
+            
+
+        
+
+        </script>
+    </body>
+</html>
