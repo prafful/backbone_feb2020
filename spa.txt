@@ -1,0 +1,7 @@
+1. Create multiple (4) view
+2. Create instance of Backbone.Router.
+3. Map each route (from URL) with respective view
+4. Ask Backbone to keep track of change 
+    in URL (browser address)
+5. Create new View for Navigation bar 
+    and listen to click events 

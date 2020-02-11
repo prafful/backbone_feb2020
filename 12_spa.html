@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <nav id="menu">
+            <ul>
+                <li data-url="page1">Page 1</li>
+                <li data-url="page2">Page 2</li>
+                <li data-url="page3">Page 3</li>
+                <li data-url="page4">Page 4</li>
+            </ul>
+
+        </nav>
+        <br>
+        <hr>
+
+        <div id="container">
+
+        </div>
+
+        <script>
+
+            var Page1View = Backbone.View.extend({
+                render: function(){
+                    this.$el.html("I am in page 1")
+                }
+            })
+            var Page2View = Backbone.View.extend({
+                render: function(){
+                    this.$el.html("I am in page 2")
+                }
+            })
+            var Page3View = Backbone.View.extend({
+                render: function(){
+                    this.$el.html("I am in page 3")
+                }
+            })
+            var Page4View = Backbone.View.extend({
+                render: function(){
+                    this.$el.html("I am in page 4")
+                }
+            })
+
+            var PageRouter = Backbone.Router.extend({
+                routes:{
+                    "page1": "viewPage1",
+                    "page1/:id": "viewPage1ById",
+                    "page2": "viewPage2",
+                    "page3": "viewPage3",
+                    "page4": "viewPage4",
+                    "*other":"defaultRoute"
+                },
+                viewPage1: function(){
+                    var currentView = new Page1View({el:"#container"})
+                    currentView.render()
+                },
+                viewPage1ById:function(id){
+                    console.log("ID Received: " + id);
+                },
+                viewPage2: function(){
+                    var currentView = new Page2View({el:"#container"})
+                    currentView.render()
+                },
+                viewPage3: function(){
+                    var currentView = new Page3View({el:"#container"})
+                    currentView.render()
+                },
+                viewPage4: function(){
+                    var currentView = new Page4View({el:"#container"})
+                    currentView.render()
+                },
+                defaultRoute: function(){
+
+                }
+
+            })
+            
+            var router = new PageRouter()
+            //Ask Backbone to keep track of change 
+            //in URL (browser address)
+            Backbone.history.start()
+            
+            var NavBarView = Backbone.View.extend({
+                events:{
+                    "click":"menuItemClicked"
+                },
+                menuItemClicked:function(event){
+                    console.log("One menu item clicked!");
+                    console.log(this);
+                    console.log(event);
+                    var $li = $(event.target)
+                    console.log($li.attr("data-url"));
+                    var route = $li.attr("data-url")
+                    router.navigate(route, {trigger: true})
+                }
+            })
+
+            var navbar = new NavBarView({el:"#menu"})
+
+        </script>
+    </body>
+</html>
