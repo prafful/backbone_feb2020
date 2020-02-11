@@ -1,57 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src="./scripts/jquery-3.4.1.js"></script>
-      <script src="./scripts/underscore.js"></script>
-      <script src="./scripts/backbone.js"></script>
-    </head>
-    <body>
-        <h3>Backbone</h3>
-   
-        <ol id="container">
 
-        </ol>
-    
-        <script>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./scripts/jquery-3.4.1.js"></script>
+    <script src="./scripts/underscore.js"></script>
+    <script src="./scripts/backbone.js"></script>
+</head>
 
-           var Person = Backbone.Model.extend() 
+<body>
+    <h3>Backbone</h3>
 
-           var Persons = Backbone.Collection.extend({
-               model:Person
-           })
+    <ol id="container">
 
-           var PersonView = Backbone.View.extend({
-                tagName:"li",
-                className: "person",
-               
-               render: function(){
-                   console.log("View is rendering!");
-                   this.$el.html(this.model.get("name"))
-                   return this
-               }
-           })
+    </ol>
 
-           var PersonsView = Backbone.View.extend({
-               render:function(){
-                   var self = this
-                   this.model.each(function(p){
-                        var pvv = new PersonView({model: p})
-                        console.log(pvv);
-                        self.$el.append(pvv.render().$el)
-                   })
-               }
-           })
+    <script>
 
-           var personsCollection = new Persons([
-                    new Person({name:"Yuko San"}),
-                    new Person({name:"Mita San"}),
-                    new Person({name:"Kita San"})
-           ])
-           var persons_v  = new PersonsView({el:"#container", model:personsCollection})
-           persons_v.render()
+        var Person = Backbone.Model.extend()
+
+        var Persons = Backbone.Collection.extend({
+            model: Person
+        })
+
+        var PersonView = Backbone.View.extend({
+            tagName: "li",
+            className: "person",
+            events: {
+                'click': 'deleteButtonClicked'
+            },
+            deleteButtonClicked: function () {
+                console.log("Delete clicked for: " + JSON.stringify(this.$el))
+                console.log(this)
+                this.remove()
+                personsCollection.remove(this.model)
+            },
+            render: function () {
+                console.log("View is rendering!");
+                this.$el.html(this.model.get("name") 
+                            + "<button>Delete</button>")
+                return this
+            }
+        })
+
+        var PersonsView = Backbone.View.extend({
+            events: {
+                'click .deleteall':'deleteAll',
+                'click .addone':'addOne'
+            },
+
+            initialize: function () {
+                console.log("Persons View Initialized!");
+                this.model.on("delete", this.collectionUpdateDelete, this)
+                this.model.on("add", this.collectionUpdatedAdd, this)
+            },
+            deleteAll: function(){
+                console.log("Delete All button clicked and captured!");
+                console.log(this.model);
+                this.model.each(element => {
+                    this.model.shift()
+                })
+                this.remove()
+                //persons_v.render()        
+                //this.$el.html("All Deleted")
+                //this.$el.append("<br><br> <button class='deleteall'>Delete All</button>")
+                //this.$el.append("<br><br> <button class='addone'>Add One Model</button><br><br>")
+                
+                
+            },
+            addOne: function(){
+                this.model.add(new Person({name:'Sample Name'}))
+                console.log("One sample person model added!");
+                console.log(this.model);
+                var pvv = new PersonView({ model: this.model.at(this.model.length-1) })
+                console.log(pvv);
+                //this.$el.remove(".deleteall", ".addone");
+                //this.$el.remove(".addone");
+                this.$el.append(pvv.render().$el)
+            },
+            collectionUpdateDelete: function () {
+                console.log("Collection is updated - deleted one model");
+            },
+            collectionUpdatedAdd:function(){
+                console.log("Capturing add event for collection update!")
+                console.log("Adding sample model to view!")
+                
+
+            },
+            render: function () {
+                this.$el.append("<br><br> <button class='deleteall'>Delete All</button>")
+                this.$el.append("<br><br> <button class='addone'>Add One Model</button><br><br>")
+                var self = this
+                this.model.each(function (p) {
+                    var pvv = new PersonView({ model: p })
+                    console.log(pvv);
+                    self.$el.append(pvv.render().$el)
+                })
+                
+            }
+        })
+
+        var personsCollection = new Persons([
+            new Person({ name: "Yuko San" }),
+            new Person({ name: "Mita San" }),
+            new Person({ name: "Kita San" })
+        ])
+        var persons_v = new PersonsView({ el: "#container", model: personsCollection })
+        persons_v.render()
 
            //var person = new Person({name:"Oka San"})
            //var pv = new PersonView({el:"#container", model: person})
@@ -59,7 +116,8 @@
            //var pv = new PersonView()
            //$("#container").html(pv.render().$el)
 
-           
-        </script>
-    </body>
+
+    </script>
+</body>
+
 </html>
