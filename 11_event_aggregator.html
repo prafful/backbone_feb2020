@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./scripts/jquery-3.4.1.js"></script>
+      <script src="./scripts/underscore.js"></script>
+      <script src="./scripts/backbone.js"></script>
+    </head>
+    <body>
+        <h3>Backbone</h3>
+        <div id="container">
+            <div id="venue-container">
+
+            </div>
+            <div id="detail-container">
+                <div id="venue-name"></div>
+            </div>
+        </div>
+        <script>
+            var Venue = Backbone.Model.extend()
+            var VenueCollection = Backbone.Collection.extend({
+                model: Venue
+            })
+
+            var VenueView = Backbone.View.extend({
+                initialize:function(options){
+                    console.log("Bus in Venue View");
+                    console.log(options.bus);
+                    this.bus = options.bus
+                },
+                events:{
+                    "click":"venueItemClicked"
+                },
+                venueItemClicked:function(){
+                    console.log("Venue Item Clicked! Next, trigger the custom event!");
+                    //trigger the event which can be captured by
+                    //DetailView
+                    console.log(this);
+                    this.bus.trigger("oneVenueItemClicked", this.model )
+                    
+                },
+                tagName:"li",
+                render: function(){
+                    //this.$el is backbone jquery object for given view
+                    this.$el.html(this.model.get("name"))
+                    console.log("Investigate this object!");
+                    console.log(this);
+                    return this
+                }
+            })
+
+            var VenueCollectionView = Backbone.View.extend({
+                initialize:function(options){
+                    console.log("Bus in VenueCollection View");
+                    console.log(options.bus);
+                    this.bus = options.bus
+                },
+                el:"#venue-container",
+                render:function(){
+                    //iterate through collection in the given 
+                    //this (instance of VenueCollectionView)
+                    //model is one of the key inside this
+                    var self = this
+                    console.log("Value of model in VenueCollectionView")
+                    console.log(this);
+                    this.model.each(function(venueItem){
+                        //use venueItem (instance of type Venue) to create
+                        //instance of type VenueView
+                        var venueViewInstance = new VenueView({
+                            model: venueItem,
+                            bus: self.bus
+                        })
+                        self.$el.append(venueViewInstance.render().$el)
+
+                    })
+                }
+
+            })
+
+            var DetailView = Backbone.View.extend({
+                initialize:function(options){
+                    console.log("Bus in DetailView");
+                    console.log(options.bus);
+                    this.bus = options.bus
+                    this.bus.on("oneVenueItemClicked", 
+                                this.handleOneVenueItemClicked, 
+                                this)
+                },
+                handleOneVenueItemClicked: function(captureVenueItem){
+                    console.log("In DetailView - one venue item is being handled!");
+                    console.log(this);
+                    this.model = captureVenueItem
+                    console.log(this);
+                    this.render()
+
+                },
+                el:"#detail-container",
+                render:function(){
+                    if(this.model){
+                        this.$("#venue-name").html(this.model.get("name"))
+                    }
+                }
+            })
+
+            //create a global event bus
+            var bus = _.extend({}, Backbone.Events)
+            console.log(bus);
+
+            var allVenues = new VenueCollection([
+                new Venue({name: 'Tiger Hill'}),
+                new Venue({name: 'Central'}),
+                new Venue({name: 'Marina'}),
+                new Venue({name: 'Alibaug'})
+            ])
+
+            var allVenuesView = new VenueCollectionView({
+                model: allVenues,
+                bus: bus
+            })
+            allVenuesView.render()
+
+            var venueDetailView = new DetailView({
+                bus: bus
+            })
+            venueDetailView.render()
+
+           
+        </script>
+    </body>
+</html>

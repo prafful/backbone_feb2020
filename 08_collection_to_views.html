@@ -90,14 +90,16 @@
 
             },
             render: function () {
+              //here
                 this.$el.append("<br><br> <button class='deleteall'>Delete All</button>")
-                this.$el.append("<br><br> <button class='addone'>Add One Model</button><br><br>")
+                this.$el.append("<br><br> <button class='addone'>Add One Model</button><br><br>")                
                 var self = this
                 this.model.each(function (p) {
                     var pvv = new PersonView({ model: p })
                     console.log(pvv);
                     self.$el.append(pvv.render().$el)
                 })
+                //buggy position - do not poke!
                 
             }
         })
