@@ -7,6 +7,7 @@ var TodoItemsView = Backbone.View.extend({
             throw new Error("collection model is not present!")
         }
         this.model.on("add", this.onAddTodoItem, this)
+        this.model.on("remove", this.onRemoveTodoItem, this);
     },
     events:{
         "click #clickadd":"onClickAdd",
@@ -43,7 +44,14 @@ var TodoItemsView = Backbone.View.extend({
         }
         
     },
+     onRemoveTodoItem: function(item){
+        this.$("li#" + item.id).remove()
+        console.log("Current collection from onRemoveTodoItem: ");
+        console.log(this.model);
+    } ,
     render: function(){
+        console.log("Current collection from render: ");
+        console.log(this.model);
         var self = this
         //inputfield
         this.$el.append("<input type='text' id='newtodoitem' autofocus></input>")

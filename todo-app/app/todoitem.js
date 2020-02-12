@@ -1,5 +1,6 @@
 var TodoItem = Backbone.Model.extend({
     defaults:{
+
         isCompleted: false
     },
     url:"anyurl",

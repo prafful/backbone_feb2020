@@ -4,6 +4,7 @@ var TodoItemView = Backbone.View.extend({
         if(!options && options.model){
             throw new Error("model is not present!")
         }
+        //below line does not execute - check!
         this.model.on("change", this.render, this)
     },
     events:{
@@ -21,14 +22,20 @@ var TodoItemView = Backbone.View.extend({
     onClickToggle:function(){
         console.log("Checkbox clicked!");
         this.model.toggle()
-        console.log(this.model);
+        console.log(this);
+        console.log(this.model.get("isCompleted"));
+        this.render()
         //this.model.trigger("hello")
+        //this.model.trigger("change")
     },
     render: function(){
-        //this.$el.attr("id", this.model.get(id))
+        console.log(this.model.id);
+        this.$el.attr("id", this.model.id)
         console.log(this.model.get("isCompleted"));
         this.$el.toggleClass("completed", this.model.get("isCompleted"))
-        this.$el.html("<input type='checkbox' id='toggle'></input>" 
+        var checked = this.model.get("isCompleted")?"checked":""
+        this.$el.html("<input type='checkbox' id='toggle'"+ 
+                        checked + "></input>" 
                         + this.model.escape("description") 
                         + "<button id='delete'>Delete</button>" )
 
