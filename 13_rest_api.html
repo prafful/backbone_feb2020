@@ -11,16 +11,13 @@
     <body>
         <h3>Backbone</h3>
         <script>
-            
             var Person = Backbone.Model.extend({
                 //url:"http://localhost:3000/friends"
             })
-
             var Persons = Backbone.Collection.extend({
                 model: Person,
                 url:"https://jsonplaceholder.typicode.com/users"
             })
-
             var allPersons = new Persons()
             console.log("Fetch from rest endpoint");
             allPersons.fetch({

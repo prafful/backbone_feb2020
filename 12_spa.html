@@ -27,8 +27,15 @@
         </div>
 
         <script>
+            var User = Backbone.Model.extend()
+
+            var Users = Backbone.Collection.extend({
+                model:User,
+                url:"https://jsonplaceholder.typicode.com/users",
+            })
 
             var Page1View = Backbone.View.extend({
+                
                 render: function(){
                     this.$el.html("I am in page 1")
                 }
@@ -75,6 +82,12 @@
                 },
                 viewPage4: function(){
                     var currentView = new Page4View({el:"#container"})
+                    this.allUsers = new Users()
+                    this.allUsers.fetch({
+                        success:function(data){
+                            console.log(data);
+                        }
+                    })
                     currentView.render()
                 },
                 defaultRoute: function(){
